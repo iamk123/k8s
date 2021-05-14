@@ -1,0 +1,38 @@
+server:
+  port: 8066
+
+spring:
+  application:
+    name: k8sapi
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+    static-path-pattern: /tmp/**
+  resources:
+    static-locations: classpath:/tmp/
+
+  datasource:
+    url: jdbc:mysql://47.94.136.85:3306/k8s?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      filter:
+        wall:
+          config:
+            condition-op-xor-allow:
+
+  jpa:
+    database: MYSQL
+    #    show-sql: TRUE
+    hibernate:
+      ddl-auto: update
+#    show-sql: true # 打印执行的语句
+
+k8s:
+  way1:   # token授权方式
+    api-http: https://192.168.2.3:6443
+    token: eyJhbGciOiJSUzI1NiIsImtpZCI6IlN3U2FhNlBlRUo2UVVTVVpTYnFzTXFqcW5SQ2xXdS00RlBRTmswWm5zTDgifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJrdWJvYXJkLXVzZXItdG9rZW4tNmJsd3IiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoia3Vib2FyZC11c2VyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiMTNjMDNiMTUtYzI3Ny00NTQxLTlhZTctZDAwMGQ2Y2VmMjAzIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmUtc3lzdGVtOmt1Ym9hcmQtdXNlciJ9.WFK16Y4TRNvL9OWACUP9Tvl5gCdRVbQSgkOBxwqAY6Vjg3p9u1RzmDiF4_A0J91mA5UXjyFLpIzfbmRUimNd01BJ8ex8L9PwJqcudbfGpBJH2428SLfjwjzJb7tzO_2TGfJj64dlSA5lcb3Gue6KlAn1_9jb0eMcRjCXGkbDerLcYIiIgwj_8J6bisCkMPRLJ9PT6ALJ7nuPWU1QQv73kA5cB2wJowMggS9Ov7WW1XSA1iDMdTq9jIyS8Fghcu8n9ozk0QCBCPiaxYvTNDyq80kbZ1ChBCtrohflxho_4n5KS8prAcPFrNALeltZJ9ur676uMPvwCn-3abZKqB5bvQ
+  way2:   # 不授权方式
+   api-http: http://192.168.2.3:8008
